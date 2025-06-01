@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  table-layout: fixed; /* prevents overflow */
+}
+
+th, td {
+  border: 1px solid #000;
+  padding: 4px;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+thead th {
+  background-color: #f0f0f0;
+}
