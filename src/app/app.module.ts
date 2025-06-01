@@ -5,8 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EstimatePaperComponent } from './estimate-paper/estimate-paper.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'; // ✅ Import this
-import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
+import { HttpClientModule } from '@angular/common/http'; 
 import { MainComponent } from './main/main.component';
 import { HtmlParser } from '@angular/compiler';
 
@@ -22,7 +21,6 @@ import { HtmlParser } from '@angular/compiler';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule ,
-    AgGridModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
