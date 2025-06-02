@@ -111,20 +111,27 @@ quotation: any = {
     
   }
 
-  recalculate() {
+ recalculate() {
   let total = 0;
   let oldTotal = 0;
 
   this.quotation.works.forEach((item: { length: any; breadth: any; rate: any; totalSqFt: number; amount: number; }) => {
-    const length = Number(item.length) || 0;
-    const breadth = Number(item.breadth) || 0;
-    const rate = Number(item.rate) || 0;
+    const length = Number(item.length);
+    const breadth = Number(item.breadth);
+    const rate = Number(item.rate);
 
-    const area = length * breadth;
-    const amount = area * rate;
+    let area = 0;
+    let amount = 0;
 
-    item.totalSqFt = area;    // optional: store for reuse if needed
-    item.amount = amount;     // optional
+    if (length > 0 && breadth > 0 && rate > 0) {
+      area = length * breadth;
+      amount = area * rate;
+    } else if (rate > 0 && (!length || !breadth)) {
+      amount = rate;
+    }
+
+    item.totalSqFt = area;
+    item.amount = amount;
 
     total += amount;
     oldTotal += area;
@@ -132,7 +139,7 @@ quotation: any = {
 
   this.quotation.total = total;
   this.quotation.oldTotal = oldTotal;
-  this.quotation.subTotal = total; // or modify as per business logic
+  this.quotation.subTotal = total;
 }
 
 
