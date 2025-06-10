@@ -17,6 +17,11 @@ isPrint: boolean = false;
     this.estimatePapers.push(this.estimatePapers.length); // Push a new ID (or just any unique number)
   }
 
+  getStartSerial(pageIndex: number): number {
+  const rowsPerPage = 15; // or however many rows you display per page
+  return pageIndex * rowsPerPage + 1;
+  }
+
   
   downloadPDF() {
     this.isPrint = true;

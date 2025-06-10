@@ -12,6 +12,7 @@ export class EstimatePaperComponent {
   // estimate-paper.component.ts
 @Input() index!: number;
 @Input() isPrint!: boolean;
+@Input() startSerial: number = 1;
 
   //  quotations = {
   //   companyName: 'RISHI INTERIOR',
@@ -111,13 +112,21 @@ quotation: any = {
     
   }
 
- recalculate() {
+recalculate() {
   let total = 0;
   let oldTotal = 0;
 
-  this.quotation.works.forEach((item: { length: any; breadth: any; rate: any; totalSqFt: number; amount: number; }) => {
+  this.quotation.works.forEach((item: {
+    length: any;
+    breadth: any;
+    sqft?: number;
+    rate: any;
+    totalSqFt: number;
+    amount: number;
+  }) => {
     const length = Number(item.length);
     const breadth = Number(item.breadth);
+    const sqft = Number(item.sqft);
     const rate = Number(item.rate);
 
     let area = 0;
@@ -126,7 +135,10 @@ quotation: any = {
     if (length > 0 && breadth > 0 && rate > 0) {
       area = length * breadth;
       amount = area * rate;
-    } else if (rate > 0 && (!length || !breadth)) {
+    } else if (sqft > 0 && rate > 0) {
+      area = sqft;
+      amount = sqft * rate;
+    } else if (rate > 0) {
       amount = rate;
     }
 
@@ -141,6 +153,7 @@ quotation: any = {
   this.quotation.oldTotal = oldTotal;
   this.quotation.subTotal = total;
 }
+
 
 
   // recalculate() {
@@ -158,4 +171,28 @@ quotation: any = {
       alert('Quotation saved successfully!');
     });
   }
+
+updateSqft(item: any): void {
+  const length = parseFloat(item.length) || 0;
+  const breadth = parseFloat(item.breadth) || 0;
+
+  if (length && breadth) {
+    item.sqft = +(length * breadth).toFixed(2);
+  } else {
+    item.sqft = null;
+  }
+  this.recalculate?.(); // Optional
+}
+
+updateFromSqft(item: any): void {
+  const sqft = parseFloat(item.sqft);
+
+  if (!isNaN(sqft) && sqft > 0) {
+    // User entered sqft directly — clear length & breadth
+    item.length = null;
+    item.breadth = null;
+  }
+  this.recalculate?.(); // Optional
+}
+
 }

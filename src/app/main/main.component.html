@@ -5,7 +5,11 @@
 <div #pdfContent>
     <div *ngFor="let item of estimatePapers; let i = index">
     <!-- <input [(ngModel)]="pageToRemove" type="number" min="1" class="px-2 py-1 border rounded w-24" placeholder="Page #" /> -->
-    <app-estimate-paper [isPrint]="isPrint" [index]="i"></app-estimate-paper>
+    <app-estimate-paper 
+        [isPrint]="isPrint"
+        [index]="i"
+        [startSerial]="getStartSerial(i)"
+      ></app-estimate-paper>
     <button (click)="removeEstimatePaper(i)" class="ml-8 opacity-0 px-1 -mt-10 hover:opacity-100 bg-yellow-500 text-white rounded">Remove Page {{i+1}}</button>
     </div>
 </div>
