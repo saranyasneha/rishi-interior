@@ -1,8 +1,8 @@
 <!-- Container for responsiveness -->
-<div class="estimate-container px-4 sm:p-6 max-w-[300mm] mx-auto bg-white" [id]="'estimate-paper-' + index">
-  <div class="border border-gray-400 rounded shadow-md px-4 sm:p-6 bg-white print:border-none print:shadow-none">
+<div class="estimate-container px-4 sm:py-6 sm:px-2 max-w-[300mm] mx-auto bg-white" [id]="'estimate-paper-' + index">
+  <div class="border border-gray-400 rounded shadow-md px-4 sm:py-6 sm:px-1.5 bg-white print:border-none print:shadow-none">
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 px-2">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 px-4">
        <div class="w-[200px] flex items-center">
             <!-- <div class="h-[100%] w-[100%]"> -->
             <img src="assets/images/logo2.png" class="h-3/4 w-3/4" alt="">
@@ -63,15 +63,15 @@
         <thead>
     <tr class="bg-gray-100">
       <th rowspan="2" class="w-[50px]">SL.NO</th>
-      <th rowspan="2" class="w-[300px]">DESCRIPTION</th>
+      <th rowspan="2" class="w-[270px]">DESCRIPTION</th>
       <th rowspan="2" class="w-[88px]">RATE (ft² in ₹)</th>
-      <th colspan="3">TOT SQ FT</th>
+      <th colspan="3" class="w-[230px]">TOT SQ FT</th>
       <th rowspan="2" class="w-[93px]">AMOUNT(₹)</th>
     </tr>
     <tr>
       <th>Length (ft)</th>
       <th>Breadth (ft)</th>
-      <th>Total (ft²)</th>
+      <th class="w-[100px]">Total (ft²)</th>
     </tr>
   </thead>
         <tbody>
@@ -102,11 +102,11 @@
               {{ item.length * item.breadth | number: '1.2-2' }}
             </td> -->
             <!-- Square Feet Input -->
-            <td class="border border-gray-400 px-1">
+            <td class="border border-gray-400">
               <span *ngIf="isPrint" style="font-size: 16px;" class="outline-none w-full text-lg text-sm">
                 {{ item.sqft | number: '1.2-2' }}
               </span>
-              <input *ngIf="!isPrint" type="number" [(ngModel)]="item.sqft" class="outline-none w-full px-1 text-sm"
+              <input *ngIf="!isPrint" type="number" [(ngModel)]="item.sqft" class="outline-none w-full text-sm"
                     (input)="updateFromSqft(item)" />
             </td>
              <td class="border border-gray-400 px-1 text-right">
@@ -131,7 +131,7 @@
       </div>
     </div>
 
-    <div class="relative w-full mt-12">
+    <div class="relative w-full mt-10">
         <!-- Wave Image -->
         <img class="w-full h-[160px] object-cover" src="assets/images/bottom-border.png" alt="">
 
