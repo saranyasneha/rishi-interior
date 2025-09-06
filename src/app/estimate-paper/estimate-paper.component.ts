@@ -13,6 +13,8 @@ export class EstimatePaperComponent {
 @Input() index!: number;
 @Input() isPrint!: boolean;
 @Input() startSerial: number = 1;
+@Input() cumulativeTotal: number = 1;
+
 
   //  quotations = {
   //   companyName: 'RISHI INTERIOR',

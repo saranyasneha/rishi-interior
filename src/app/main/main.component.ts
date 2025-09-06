@@ -11,6 +11,7 @@ import * as html2pdf from 'html2pdf.js';
 export class MainComponent {
  estimatePapers: number[] = [0]; // Initial one paper
 isPrint: boolean = false;
+totalsPerPage: number[] = [];
 
   @ViewChild('pdfContent') pdfContent!: ElementRef;
   addEstimatePaper() {
@@ -20,6 +21,10 @@ isPrint: boolean = false;
   getStartSerial(pageIndex: number): number {
   const rowsPerPage = 15; // or however many rows you display per page
   return pageIndex * rowsPerPage + 1;
+  }
+
+  getCumulativeTotal(upToIndex: number): number {
+    return this.totalsPerPage.slice(0, upToIndex + 1).reduce((acc, val) => acc + val, 0);
   }
 
   
