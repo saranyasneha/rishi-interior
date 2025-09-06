@@ -9,7 +9,9 @@
         [isPrint]="isPrint"
         [index]="i"
         [startSerial]="getStartSerial(i)"
-        [cumulativeTotal]="getCumulativeTotal(i)"
+        [cumulativeTotal]="getCumulativeTotal(i -1)"
+        (subtotalCalculated)="onSubtotalCalculated($event)">
+
       ></app-estimate-paper>
     <button (click)="removeEstimatePaper(i)" class="ml-8 opacity-0 px-1 -mt-10 hover:opacity-100 bg-yellow-500 text-white rounded">Remove Page {{i+1}}</button>
     </div>

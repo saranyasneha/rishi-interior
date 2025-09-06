@@ -1,6 +1,6 @@
 <!-- Container for responsiveness -->
-<div class="estimate-container px-4 pt-6 mt-1 pb-6 sm:p-6 max-w-[300mm] mx-auto bg-white" [id]="'estimate-paper-' + index">
-  <div class="border border-gray-400 rounded shadow-md p-4 sm:p-6 bg-white print:border-none print:shadow-none">
+<div class="estimate-container px-4 sm:p-6 max-w-[300mm] mx-auto bg-white" [id]="'estimate-paper-' + index">
+  <div class="border border-gray-400 rounded shadow-md px-4 sm:p-6 bg-white print:border-none print:shadow-none">
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 px-2">
        <div class="w-[200px] flex items-center">
@@ -27,7 +27,7 @@
     </div>
 
     <!-- Main Work Table -->
-    <div class="overflow-x-auto mt-4">
+    <div class="overflow-x-auto mt-2">
         
 
     <!-- Customer Info -->
@@ -64,9 +64,9 @@
     <tr class="bg-gray-100">
       <th rowspan="2" class="w-[50px]">SL.NO</th>
       <th rowspan="2" class="w-[300px]">DESCRIPTION</th>
-      <th rowspan="2">RATE (ft² in ₹)</th>
+      <th rowspan="2" class="w-[88px]">RATE (ft² in ₹)</th>
       <th colspan="3">TOT SQ FT</th>
-      <th rowspan="2">AMOUNT(₹)</th>
+      <th rowspan="2" class="w-[93px]">AMOUNT(₹)</th>
     </tr>
     <tr>
       <th>Length (ft)</th>
@@ -81,21 +81,21 @@
                 <span *ngIf="isPrint" style="font-size: 18px;"  class="outline-none w-full text-lg -pt-4 text-sm" >{{ item.description }}</span>
               <input *ngIf="!isPrint" [(ngModel)]="item.description" style="font-size: 18px;"  class="outline-none w-full text-lg -pt-4 text-sm" />
             </td> -->
-            <td class="border border-gray-400 px-1 pt-1 pb-2">
-                <span *ngIf="isPrint" style="font-size: 18px;" class="outline-none w-full text-lg -pt-4 text-sm">{{ item.description }}</span>
-                <input *ngIf="!isPrint" [(ngModel)]="item.description" style="font-size: 18px;" class="outline-none w-full text-lg -pt-4 text-sm" />
+            <td class="border border-gray-400 h-full">
+                <span *ngIf="isPrint" style="font-size: 18px;" class="outline-none w-full text-lg -pt-3 text-sm">{{ item.description }}</span>
+                <input *ngIf="!isPrint" [(ngModel)]="item.description" style="font-size: 18px;" class="outline-none w-full h-full text-lg  text-sm" />
             </td>
 
             <td class="border border-gray-400 px-1">
-                  <span *ngIf="isPrint" style="font-size: 18px;"  class="outline-none w-full text-lg -pt-4 text-sm" >{{ item.rate }}</span>
+                  <span *ngIf="isPrint" style="font-size: 16px;"  class="outline-none w-full text-lg -pt-3 text-sm" >{{ item.rate }}</span>
               <input *ngIf="!isPrint" type="number" [(ngModel)]="item.rate" class="outline-none w-full px-1 text-sm" (input)="recalculate()" />
             </td>
             <td class="border border-gray-400 px-1">
-                  <span *ngIf="isPrint" style="font-size: 18px;"  class="outline-none w-full text-lg -pt-4 text-sm" >{{ item.length }}</span>
+                  <span *ngIf="isPrint" style="font-size: 16px;"  class="outline-none w-full text-lg -pt-3 text-sm" >{{ item.length }}</span>
               <input *ngIf="!isPrint"  (input)="updateSqft(item)"  type="number" [(ngModel)]="item.length" class="outline-none w-full px-1 text-sm" (input)="recalculate()" />
             </td>
             <td class="border border-gray-400 px-1">
-                  <span *ngIf="isPrint" style="font-size: 18px;"  class="outline-none w-full text-lg -pt-4 text-sm" >{{ item.breadth }}</span>
+                  <span *ngIf="isPrint" style="font-size: 16px;"  class="outline-none w-full text-lg -pt-3 text-sm" >{{ item.breadth }}</span>
               <input *ngIf="!isPrint"  (input)="updateSqft(item)"  type="number" [(ngModel)]="item.breadth" class="outline-none w-full px-1 text-sm" (input)="recalculate()" />
             </td>
             <!-- <td class="border border-gray-400 px-1 text-right">
@@ -103,7 +103,7 @@
             </td> -->
             <!-- Square Feet Input -->
             <td class="border border-gray-400 px-1">
-              <span *ngIf="isPrint" style="font-size: 18px;" class="outline-none w-full text-lg text-sm">
+              <span *ngIf="isPrint" style="font-size: 16px;" class="outline-none w-full text-lg text-sm">
                 {{ item.sqft | number: '1.2-2' }}
               </span>
               <input *ngIf="!isPrint" type="number" [(ngModel)]="item.sqft" class="outline-none w-full px-1 text-sm"
@@ -123,15 +123,15 @@
     </div>
 
     <!-- Totals -->
-    <div class="flex flex-col sm:flex-row justify-between items-end mt-6">
+    <div class="flex flex-col sm:flex-row justify-between items-end mt-1">
       <div></div>
       <div class="text-right text-sm sm:text-base">
-        <p><strong>TOTAL:</strong> {{ quotation.total | number: '1.2-2' }}</p>
         <p><strong>SUB TOTAL:</strong> {{ quotation.subTotal | number: '1.2-2' }}</p>
+        <p><strong>TOTAL:</strong> {{ quotation.total | number: '1.2-2' }}</p>
       </div>
     </div>
 
-    <div class="relative w-full mt-10">
+    <div class="relative w-full mt-12">
         <!-- Wave Image -->
         <img class="w-full h-[160px] object-cover" src="assets/images/bottom-border.png" alt="">
 

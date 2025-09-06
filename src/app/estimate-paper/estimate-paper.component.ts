@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ColDef } from 'ag-grid-community';
 
@@ -13,7 +13,8 @@ export class EstimatePaperComponent {
 @Input() index!: number;
 @Input() isPrint!: boolean;
 @Input() startSerial: number = 1;
-@Input() cumulativeTotal: number = 1;
+@Input() cumulativeTotal: number = 0;
+@Output() subtotalCalculated = new EventEmitter<{ index: number, subtotal: number }>();
 
 
   //  quotations = {
@@ -38,6 +39,13 @@ export class EstimatePaperComponent {
   //   total: 100525,
   //   subTotal: 882519
   // };
+
+ ngOnChanges(changes: SimpleChanges) {
+    if (changes['cumulativeTotal'] && !changes['cumulativeTotal'].firstChange) {
+      // If previous pages changed → recompute total
+      this.recalculate();
+    }
+  }
 
 quotation: any = {
   companyName: 'RISHI INTERIOR',
@@ -151,9 +159,11 @@ recalculate() {
     oldTotal += area;
   });
 
-  this.quotation.total = total;
+    this.quotation.total = this.cumulativeTotal + total; // include previous pages
   this.quotation.oldTotal = oldTotal;
   this.quotation.subTotal = total;
+    this.subtotalCalculated.emit({ index: this.index, subtotal: total });
+
 }
 
 

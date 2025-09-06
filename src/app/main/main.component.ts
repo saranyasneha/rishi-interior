@@ -24,8 +24,20 @@ totalsPerPage: number[] = [];
   }
 
   getCumulativeTotal(upToIndex: number): number {
-    return this.totalsPerPage.slice(0, upToIndex + 1).reduce((acc, val) => acc + val, 0);
-  }
+  if (upToIndex < 0) return 0;
+  return this.totalsPerPage.slice(0, upToIndex + 1).reduce((acc, val) => acc + val, 0);
+}
+
+onSubtotalCalculated(event: { index: number, subtotal: number }) {
+  this.totalsPerPage[event.index] = event.subtotal;
+  // Force recalculation for Angular bindings → later pages will get updated cumulativeTotal
+  this.totalsPerPage = [...this.totalsPerPage]; 
+}
+
+
+//   onSubtotalCalculated(event: { index: number, subtotal: number }) {
+//   this.totalsPerPage[event.index] = event.subtotal;
+// }
 
   
   downloadPDF() {
